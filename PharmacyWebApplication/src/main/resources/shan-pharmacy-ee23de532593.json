@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "shan-pharmacy",
+  "private_key_id": "ee23de5325930344eb47e462c8369c01218ae09b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDIAQG8jngaNmFS\n0rFHamr9etPq+dwABOpfQWpFUsUJrbNO6lhsCVM5FSg+7nZGc0RhTLyc+XI8UoSW\nMoRXZFgAr0Bt0I4WOiLVtKA6uKTRf5+lNheD83aej3HreUQX3EH5lLfmqau+n08G\n1wCUFD0w4VBUAuIgVRv5DPDP5aSzWM8y3X+Topz9SACqTA/RAWkTBMlHTmwig6aO\n2Mb4VqqXG3uJD2e+TfSiw3realIpNLULwsrA1GjAQltZqGh7USDzEMQ6qn6RkUG9\nuqLAUBjYnm/NCufYfPrfDrBXpaiWE0d08z7TOmfWUQzgdNbeCPAvqXvwnnAeiFpA\nTLRIRAEdAgMBAAECggEAMYeMTEt04zrp1aavN9obBkxzbBq12HxfJTlQLbw+ZvPw\n9n9S5+hUR4vdhF4uBKrZeYYVJIOivl0KEB8RBopnP74mxLsz4L3DcCxzzK76xBXo\nrXOMlcUGcGRiKBgHHKiTXxEtDK6ihUmy+qTmdAViFPeLWs6+/JZPH9lMTpPWeoI4\ntHiVzlC7VikqzRYOmn16DmP+f90V6J3apdFQXVfgZByC3qNppe3Hz6up0rqIGbnP\nAZKk36tjHfkv+A9FHnl0RH8w5cRKm4w7FVpjEVjjlH0ziJT5YzY+xhgF8iktGeuF\nVGg8bgQBuVJh+h950bpreHcNZR/miVoZd4zyzZgjSQKBgQDx9sLMw/0sfGk6emr4\nd7b5H/dQ1ayAWL5ld03ly0+uJF3ka3Q8ST6gFYi1FPQ9FkitX8vLz1PiyfVE444g\nGpv3qCRjJAjIDzfP0MapogSrHvUwUH2AZRlDs5ljh7a26A1kfvXfZhvtg9LiFsYZ\nf0QJF9iE7dXtecvv+qkfL/mdxQKBgQDTmyCO01AgRvEknHFQMBfSxsWLiDT9J9Hg\ndPMoxvgLgBEZdil5SUYVjpksVQsT2/bwCHdWezpr2/JaAObatmtyqfSWSwhAJLZp\ndzpbEW6ZyVfrYbawEq0XEj1Uwlm3+Y90hht0lRoYziXEiTeOWaCNsM2Ycysx1/xk\nMGCtbcSjeQKBgGY4kI1/UysDGFWbOCvmL4fJ6GrfCnRiiXVGVMN7BBuWw4/nkYCS\nlQF+d3XA93oDOwr7yJY+7bqHBbZnyDhp5XBYOZ8krw0N2M9T7Unm57//YShbKNog\nW+8NJgU1ZYyaNmY5eNg7RBswsNvRMTm+WVjaGR/3doRQC0dEB0TkuLjdAoGBAM67\n1Ac19CZUqOt33EzXb68Be6ZioEJkUOvV1mqUWWoC6LHTe5l/OPV+p69kNrpkQNEp\ntE3Nfro53ICKOQCdEESqPsdG7vyb4YsQbPbkBQZCa58PjAhhdrH/o+PXLQhMzRau\nnsw7j4+Ed+mXlauBbRaBEZxLiHvd5DuN+CX4BBEhAoGBAKrpN70+hC0R1rOJbQJI\nCGk0b9HxuL+Cw0aMskaG/5jOtFeadrbPvgnnlHSwmj1JSs5TtRijZlhXl3LwSC+/\nC7Oy6EILqxND23y4PjSRTk9846hBeEtdvN/IpoR0SkFXHRDN3bxjYfslcrP4LnO4\nFl1SiJzVmGLPbgOj0P/Iy8IP\n-----END PRIVATE KEY-----\n",
+  "client_email": "shan-pharmacy-service@shan-pharmacy.iam.gserviceaccount.com",
+  "client_id": "101729150651966989675",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/shan-pharmacy-service%40shan-pharmacy.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

@@ -1,5 +1,7 @@
 package com.example.PharmacyWebApplication.PharmacyWebApplication.dto;
 
+import java.time.LocalDate;
+
 public class ProductDto {
     private String productName;
     private String productImageUrl;
@@ -10,6 +12,8 @@ public class ProductDto {
     private Integer categoryId;
     private Integer id;
     private Double quantity;
+    private LocalDate expDate;
+    private Double threshold;
 
     // Getters and setters
 
@@ -19,6 +23,14 @@ public class ProductDto {
 
     public void setProductName(String productName) {
         this.productName = productName;
+    }
+
+    public Double getThreshold() {
+        return threshold;
+    }
+
+    public void setThreshold(Double threshold) {
+        this.threshold = threshold;
     }
 
     public String getProductImageUrl() {
@@ -35,6 +47,14 @@ public class ProductDto {
 
     public void setProductRating(Integer productRating) {
         this.productRating = productRating;
+    }
+
+    public LocalDate getExpDate() {
+        return expDate;
+    }
+
+    public void setExpDate(LocalDate expDate) {
+        this.expDate = expDate;
     }
 
     public Double getProductPrice() {
@@ -85,3 +105,4 @@ public class ProductDto {
         this.quantity = quantity;
     }
 }
+

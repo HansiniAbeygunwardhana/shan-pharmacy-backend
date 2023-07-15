@@ -1,5 +1,6 @@
 package com.example.PharmacyWebApplication.PharmacyWebApplication.model;
 
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 

@@ -1,17 +1,17 @@
 package com.example.PharmacyWebApplication.PharmacyWebApplication.service;
 
-import com.example.PharmacyWebApplication.PharmacyWebApplication.common.ApiResponse;
+
+
 import com.example.PharmacyWebApplication.PharmacyWebApplication.model.Category;
 import com.example.PharmacyWebApplication.PharmacyWebApplication.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class CategoryService {
-//    @Autowired
+    //    @Autowired
 //    CategoryRepository categoryRepository;
     @Autowired
     CategoryRepository categoryRepository;

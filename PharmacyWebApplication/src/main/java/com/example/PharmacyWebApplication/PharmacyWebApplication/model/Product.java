@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "products")
 public class Product {
@@ -32,6 +34,10 @@ public class Product {
     @Column(name = "quantity")
     private Double quantity;
 
+    @Column(name="expireDate")
+    private LocalDate expDate;
+    private Double threshold;
+
     // Many-to-one relationship
     @ManyToOne
     @JoinColumn(name = "category_id")
@@ -55,12 +61,28 @@ public class Product {
         }
     }
 
+    public Double getThreshold() {
+        return threshold;
+    }
+
+    public void setThreshold(Double threshold) {
+        this.threshold = threshold;
+    }
+
     public String getProductImageUrl() {
         return productImageUrl;
     }
 
     public void setProductImageUrl(String productImageUrl) {
         this.productImageUrl = productImageUrl;
+    }
+
+    public LocalDate getExpDate() {
+        return expDate;
+    }
+
+    public void setExpDate(LocalDate expDate) {
+        this.expDate = expDate;
     }
 
     public Integer getProductRating() {
