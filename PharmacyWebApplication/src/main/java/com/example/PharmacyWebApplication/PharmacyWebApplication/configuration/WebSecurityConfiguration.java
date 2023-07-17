@@ -51,9 +51,9 @@ public class WebSecurityConfiguration {
 
         httpSecurity
                 .csrf(customizer -> customizer
-                        .ignoringRequestMatchers("/authenticate","/registerNewUser","/product/list")) // Exclude "/authenticate" from CSRF protection
+                        .ignoringRequestMatchers("/authenticate","/registerNewUser","/product/list", "/product/add", "product/list/{id}", "product/update/{id}", "product/delete/{id}", "/category/create", "/category/list", "/category/update/{categoryId}", "/category/delete/{categoryId}","/placeOrder")) // Exclude "/authenticate" from CSRF protection
                 .authorizeRequests()
-                .requestMatchers("/authenticate", "/registerNewUser","/product/list").permitAll()
+                .requestMatchers("/authenticate","/registerNewUser","/product/list", "/product/add", "product/list/{id}", "product/update/{id}", "product/delete/{id}", "/category/create", "/category/list", "/category/update/{categoryId}", "/category/delete/{categoryId}", "/placeOrder").permitAll()
                 .requestMatchers(HttpHeaders.ALLOW).permitAll()
                 .anyRequest().authenticated()
                 .and()
