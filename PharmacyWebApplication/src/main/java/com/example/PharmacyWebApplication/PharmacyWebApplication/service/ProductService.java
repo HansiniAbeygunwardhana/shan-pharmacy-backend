@@ -1,9 +1,14 @@
 package com.example.PharmacyWebApplication.PharmacyWebApplication.service;
 
 
+import com.example.PharmacyWebApplication.PharmacyWebApplication.configuration.JwtRequestFilter;
+import com.example.PharmacyWebApplication.PharmacyWebApplication.dao.CartDao;
+import com.example.PharmacyWebApplication.PharmacyWebApplication.dao.UserDao;
 import com.example.PharmacyWebApplication.PharmacyWebApplication.dto.ProductDto;
+import com.example.PharmacyWebApplication.PharmacyWebApplication.model.Cart;
 import com.example.PharmacyWebApplication.PharmacyWebApplication.model.Category;
 import com.example.PharmacyWebApplication.PharmacyWebApplication.model.Product;
+import com.example.PharmacyWebApplication.PharmacyWebApplication.model.User;
 import com.example.PharmacyWebApplication.PharmacyWebApplication.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -21,6 +27,11 @@ public class ProductService {
     ProductRepository productRepository;
     @Autowired
     FileService fileService;
+    @Autowired
+    private UserDao userDao;
+
+    @Autowired
+    private CartDao cartDao;
 
     public void createProduct(ProductDto productDto, Category category, MultipartFile file) throws IOException {
         String imageUrl;
@@ -125,6 +136,23 @@ public class ProductService {
         return productDto;
     }
 
+    public List<Product> getProductDetails(boolean isSingleProductCheckout, Integer productId) {
+        if (isSingleProductCheckout && productId != 0) {
+            // we are going to buy a single product
 
+            List<Product> list = new ArrayList<>();
+            Product product = productRepository.findById(productId).get();
+            list.add(product);
+            return list;
+        } else {
+            // we are going to checkout entire cart
+            String username = JwtRequestFilter.CURRENT_USER;
+            User user = userDao.findById(username).get();
+            List<Cart> carts = cartDao.findByUser(user);
+
+            return carts.stream().map(x -> x.getProduct()).collect(Collectors.toList());
+        }
+
+    }
 }
 

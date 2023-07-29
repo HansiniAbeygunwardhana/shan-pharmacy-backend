@@ -3,12 +3,14 @@ package com.example.PharmacyWebApplication.PharmacyWebApplication.controller;
 import com.example.PharmacyWebApplication.PharmacyWebApplication.common.ApiResponse;
 import com.example.PharmacyWebApplication.PharmacyWebApplication.dto.ProductDto;
 import com.example.PharmacyWebApplication.PharmacyWebApplication.model.Category;
+import com.example.PharmacyWebApplication.PharmacyWebApplication.model.Product;
 import com.example.PharmacyWebApplication.PharmacyWebApplication.repository.CategoryRepository;
 import com.example.PharmacyWebApplication.PharmacyWebApplication.service.FileService;
 import com.example.PharmacyWebApplication.PharmacyWebApplication.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -57,7 +59,20 @@ public class ProductController {
         ProductDto viewById=productService.listProductById(id);
         return new ResponseEntity<ProductDto>(viewById,HttpStatus.OK);
     }
+    @PreAuthorize("hasRole('user')")
+    @GetMapping({"/getProductDetails/{isSingleProductCheckout}/{productId}"})
+    public List<Product> getProductDetails(@PathVariable(name = "isSingleProductCheckout" ) boolean isSingleProductCheckout,
+                                           @PathVariable(name = "productId")  Integer productId) {
+        return productService.getProductDetails(isSingleProductCheckout, productId);
+    }
 
+
+//    @GetMapping("/listDetails/{id}")
+//    public ResponseEntity<ProductDto> listProductById(@PathVariable int id){
+//
+//        ProductDto viewById=productService.listProductById(id);
+//        return new ResponseEntity<ProductDto>(viewById,HttpStatus.OK);
+//    }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<ApiResponse> updateCategory(@PathVariable("id") int id ,@RequestBody ProductDto productDto) throws Exception {

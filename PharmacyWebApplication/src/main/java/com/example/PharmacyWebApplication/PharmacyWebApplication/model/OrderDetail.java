@@ -16,7 +16,8 @@ public class OrderDetail {
     private Double orderAmount;
     @OneToOne
     private Product product;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "user_name")
     private User user;
     private String transactionId;
 

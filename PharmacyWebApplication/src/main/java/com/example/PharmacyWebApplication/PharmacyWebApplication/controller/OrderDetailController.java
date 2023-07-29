@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class OrderDetailController {
 
     @Autowired
@@ -20,25 +21,24 @@ public class OrderDetailController {
     public void placeOrder(@RequestBody OrderInput orderInput) {
         orderDetailService.placeOrder(orderInput);
     }
+    @PreAuthorize("hasRole('user')")
+    @GetMapping({"/getOrderDetails"})
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetailService.getOrderDetails();
+    }
 
-//    @PreAuthorize("hasRole('user')")
-//    @GetMapping({"/getOrderDetails"})
-//    public List<OrderDetail> getOrderDetails() {
-//        return orderDetailService.getOrderDetails();
-//    }
-//
-//    @PreAuthorize("hasRole('admin')")
-//    @GetMapping({"/getAllOrderDetails/{status}"})
-//    public List<OrderDetail> getAllOrderDetails(@PathVariable(name = "status") String status) {
-//        return orderDetailService.getAllOrderDetails(status);
-//    }
-//
-//    @PreAuthorize("hasRole('admin')")
-//    @GetMapping({"/markOrderAsDelivered/{orderId}"})
-//    public void markOrderAsDelivered(@PathVariable(name = "orderId") Integer orderId) {
-//        orderDetailService.markOrderAsDelivered(orderId);
-//    }
-//
+    @PreAuthorize("hasRole('admin')")
+    @GetMapping({"/getAllOrderDetails/{status}"})
+    public List<OrderDetail> getAllOrderDetails(@PathVariable(name = "status") String status) {
+        return orderDetailService.getAllOrderDetails(status);
+    }
+
+    @PreAuthorize("hasRole('admin')")
+    @GetMapping({"/markOrderAsDelivered/{orderId}"})
+    public void markOrderAsDelivered(@PathVariable(name = "orderId") Integer orderId) {
+        orderDetailService.markOrderAsDelivered(orderId);
+    }
+
 //    @PreAuthorize("hasRole('user')")
 //    @GetMapping({"/createTransaction/{amount}"})
 //    public TransactionDetails createTransaction(@PathVariable(name = "amount") Double amount) {
