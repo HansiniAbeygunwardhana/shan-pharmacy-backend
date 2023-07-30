@@ -18,15 +18,26 @@ public class CartController {
 
     @PreAuthorize("hasRole('user')")
     @GetMapping({"/addToCart/{id}"})
-    public Cart addToCart(@PathVariable(name = "id") int id) {
-        return cartService.addToCart(id);
+    public Cart addToCart(@PathVariable(name = "id") int id,
+                          @RequestParam(name = "quantity", required = false, defaultValue = "1") Double quantity) {
+        // Call the addToCart method with the product id and quantity
+        return cartService.addToCart(id, quantity);
     }
 
-//    @PreAuthorize("hasRole('User')")
-//    @DeleteMapping({"/deleteCartItem/{cartId}"})
-//    public void deleteCartItem(@PathVariable(name = "cartId") Integer cartId) {
-//        cartService.deleteCartItem(cartId);
-//    }
+    @PreAuthorize("hasRole('user')")
+    @PutMapping("/updateCartItemQuantity/{cartId}")
+    public Cart updateCartItemQuantity(
+            @PathVariable(name = "cartId") Integer cartId,
+            @RequestParam(name = "quantity") Double quantity) {
+        // Call the updateCartItemQuantity method with the cartId and new quantity
+        return cartService.updateCartItemQuantity(cartId, quantity);
+    }
+
+    @PreAuthorize("hasRole('user')")
+    @DeleteMapping({"/deleteCartItem/{cartId}"})
+    public void deleteCartItem(@PathVariable(name = "cartId") Integer cartId) {
+        cartService.deleteCartItem(cartId);
+    }
 
     @PreAuthorize("hasRole('user')")
     @GetMapping({"/getCartDetails"})

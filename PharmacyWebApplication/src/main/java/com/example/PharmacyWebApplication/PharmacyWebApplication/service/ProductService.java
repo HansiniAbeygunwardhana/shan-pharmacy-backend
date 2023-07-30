@@ -136,12 +136,12 @@ public class ProductService {
         return productDto;
     }
 
-    public List<Product> getProductDetails(boolean isSingleProductCheckout, Integer productId) {
-        if (isSingleProductCheckout && productId != 0) {
+    public List<Product> getProductDetails(boolean isSingleProductCheckout, int id) {
+        if (isSingleProductCheckout && id != 0) {
             // we are going to buy a single product
 
             List<Product> list = new ArrayList<>();
-            Product product = productRepository.findById(productId).get();
+            Product product = productRepository.findById(id).get();
             list.add(product);
             return list;
         } else {

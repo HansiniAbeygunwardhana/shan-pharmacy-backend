@@ -51,9 +51,9 @@ public class WebSecurityConfiguration {
 
         httpSecurity
                 .csrf(customizer -> customizer
-                        .ignoringRequestMatchers("/authenticate","/registerNewUser","/product/list", "/product/add", "product/list/{id}", "product/update/{id}", "product/delete/{id}", "/category/create", "/category/list", "/category/update/{categoryId}", "/category/delete/{categoryId}","/placeOrder", "/addToCart/{id}", "/getCartDetails", "/getProductDetails/{isSingleProductCheckout}/{id}")) // Exclude "/authenticate" from CSRF protection
+                        .ignoringRequestMatchers("/authenticate","/registerNewUser","/product/list", "/product/add", "product/list/{id}", "product/update/{id}", "product/delete/{id}", "/category/create", "/category/list", "/category/update/{categoryId}", "/category/delete/{categoryId}","/placeOrder", "/addToCart/{id}", "/getCartDetails", "/getProductDetails/{isSingleProductCheckout}/{id}", "/updateCartItemQuantity/{cartId}", "/deleteCartItem/{cartId}", "/placeOrder/{isSingleProductCheckout}")) // Exclude "/authenticate" from CSRF protection
                 .authorizeRequests()
-                .requestMatchers("/authenticate","/registerNewUser","/product/list", "/product/add", "product/list/{id}", "product/update/{id}", "product/delete/{id}", "/category/create", "/category/list", "/category/update/{categoryId}", "/category/delete/{categoryId}", "/placeOrder", "/addToCart/{id}", "/getCartDetails", "/getProductDetails/{isSingleProductCheckout}/{id}").permitAll()
+                .requestMatchers("/authenticate","/registerNewUser","/product/list", "/product/add", "product/list/{id}", "product/update/{id}", "product/delete/{id}", "/category/create", "/category/list", "/category/update/{categoryId}", "/category/delete/{categoryId}", "/placeOrder", "/addToCart/{id}", "/getCartDetails", "/getProductDetails/{isSingleProductCheckout}/{id}", "/updateCartItemQuantity/{cartId}", "/deleteCartItem/{cartId}", "/placeOrder/{isSingleProductCheckout}").permitAll()
                 .requestMatchers(HttpHeaders.ALLOW).permitAll()
                 .anyRequest().authenticated()
                 .and()

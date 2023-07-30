@@ -57,35 +57,45 @@ public class OrderDetailService {
         return orderDetailDao.findByUser(user);
     }
 
-    public void placeOrder(OrderInput orderInput) {
+    public void placeOrder(OrderInput orderInput, boolean isSingleProductCheckout) {
         List<OrderProductQuantity> productQuantityList = orderInput.getOrderProductQuantityList();
+        String currentUser = JwtRequestFilter.CURRENT_USER;
+        User user = userDao.findById(currentUser).orElseThrow(() -> new RuntimeException("User not found"));
 
-        for (OrderProductQuantity o : productQuantityList) {
-            Product product = productRepository.findById(o.getProductId()).get();
+        // If it's a single product checkout, place an order for that product only
+        if (isSingleProductCheckout) {
+            for (OrderProductQuantity o : productQuantityList) {
+                Product product = productRepository.findById(o.getProductId()).orElseThrow(() -> new RuntimeException("Product not found"));
 
-            String currentUser = JwtRequestFilter.CURRENT_USER;
-            User user = userDao.findById(currentUser).get();
+                OrderDetail orderDetail = new OrderDetail(
+                        orderInput.getPaymentMethod(),
+                        ORDER_PLACED,
+                        product.getProductPrice() * o.getQuantity(),
+                        product,
+                        user
+                );
 
-            OrderDetail orderDetail = new OrderDetail(
-                    orderInput.getFullName(),
-                    orderInput.getFullAddress(),
-                    orderInput.getContactNumber(),
-                    orderInput.getAlternateContactNumber(),
-                    ORDER_PLACED,
-                    product.getProductPrice() * o.getQuantity(),
-                    product,
-                    user
-            );
+                orderDetailDao.save(orderDetail);
+            }
+        } else {
+            // If it's not a single product checkout, place an order for all the products in the cart
+            List<Cart> carts = cartDao.findByUser(user);
+            for (Cart cart : carts) {
+                Product product = cart.getProduct();
+                OrderDetail orderDetail = new OrderDetail(
+                        orderInput.getPaymentMethod(),
+                        ORDER_PLACED,
+                        product.getProductPrice() * cart.getQuantity(),
+                        product,
+                        user
+                );
 
-            // empty the cart.
-//            if (!isSingleProductCheckout) {
-//                List<Cart> carts = cartDao.findByUser(user);
-//                carts.stream().forEach(x -> cartDao.deleteById(x.getCartId()));
-//            }
-
-            orderDetailDao.save(orderDetail);
+                orderDetailDao.save(orderDetail);
+                cartDao.delete(cart);
+            }
         }
     }
+
 
     public void markOrderAsDelivered(Integer orderId) {
         OrderDetail orderDetail = orderDetailDao.findById(orderId).get();

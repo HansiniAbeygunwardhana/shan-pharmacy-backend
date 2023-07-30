@@ -9,19 +9,28 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer cartId;
+
     @OneToOne
     private Product product;
+
     @ManyToOne
+    @JoinColumn(name = "user_name")
     private User user;
 
-    public Cart(){
+    private double quantity;
 
+    // Default constructor with no arguments (required by JPA)
+    public Cart() {
     }
 
-    public Cart(Product product, User user) {
+    public Cart(Product product, User user, double quantity) {
         this.product = product;
         this.user = user;
+        this.quantity = quantity;
     }
+
+    // Getters and setters
+    // ...
 
     public Integer getCartId() {
         return cartId;
@@ -45,5 +54,13 @@ public class Cart {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public double getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(double quantity) {
+        this.quantity = quantity;
     }
 }

@@ -59,11 +59,11 @@ public class ProductController {
         ProductDto viewById=productService.listProductById(id);
         return new ResponseEntity<ProductDto>(viewById,HttpStatus.OK);
     }
-    @PreAuthorize("hasRole('user')")
+
     @GetMapping({"/getProductDetails/{isSingleProductCheckout}/{productId}"})
     public List<Product> getProductDetails(@PathVariable(name = "isSingleProductCheckout" ) boolean isSingleProductCheckout,
-                                           @PathVariable(name = "productId")  Integer productId) {
-        return productService.getProductDetails(isSingleProductCheckout, productId);
+                                           @PathVariable(name = "productId")  int id) {
+        return productService.getProductDetails(isSingleProductCheckout, id);
     }
 
 
