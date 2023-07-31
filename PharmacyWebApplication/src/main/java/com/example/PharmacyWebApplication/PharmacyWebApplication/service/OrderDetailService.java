@@ -8,6 +8,7 @@ import com.example.PharmacyWebApplication.PharmacyWebApplication.model.*;
 import com.example.PharmacyWebApplication.PharmacyWebApplication.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,7 @@ public class OrderDetailService {
     @Autowired
     private CartDao cartDao;
 
-    public List<OrderDetail> getAllOrderDetails(String status) {
+    public List<OrderDetail> getAllOrderDetails(@RequestParam(name = "status", defaultValue = "All") String status) {
         List<OrderDetail> orderDetails = new ArrayList<>();
 
         if (status.equals("All")) {
