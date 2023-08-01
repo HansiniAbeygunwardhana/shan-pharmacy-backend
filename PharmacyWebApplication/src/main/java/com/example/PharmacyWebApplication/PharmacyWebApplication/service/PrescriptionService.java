@@ -3,11 +3,13 @@ package com.example.PharmacyWebApplication.PharmacyWebApplication.service;
 import com.example.PharmacyWebApplication.PharmacyWebApplication.configuration.JwtRequestFilter;
 import com.example.PharmacyWebApplication.PharmacyWebApplication.dao.UserDao;
 import com.example.PharmacyWebApplication.PharmacyWebApplication.dto.PrescriptionDto;
+import com.example.PharmacyWebApplication.PharmacyWebApplication.model.OrderDetail;
 import com.example.PharmacyWebApplication.PharmacyWebApplication.model.Prescription;
 import com.example.PharmacyWebApplication.PharmacyWebApplication.model.User;
 import com.example.PharmacyWebApplication.PharmacyWebApplication.repository.PrescriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -55,18 +57,25 @@ public class PrescriptionService {
         prescriptionDto.setSubstitute(prescription.getSubstitute());
         return prescriptionDto;
     }
-    public List<PrescriptionDto> getAllPrescriptions() {
-        List<Prescription> allPrescriptions = prescriptionRepository.findAll();
-        List<PrescriptionDto> prescriptionDtos = new ArrayList<>();
-        for (Prescription prescription:allPrescriptions){
-            prescriptionDtos.add(getPrescriptionDto(prescription));
-        }
-        return prescriptionDtos;
-    }
+//    public List<PrescriptionDto> getAllPrescriptions() {
+//        List<Prescription> allPrescriptions = prescriptionRepository.findAll();
+//        List<PrescriptionDto> prescriptionDtos = new ArrayList<>();
+//        for (Prescription prescription:allPrescriptions){
+//            prescriptionDtos.add(getPrescriptionDto(prescription));
+//        }
+//        return prescriptionDtos;
+//    }
 
     public List<Prescription> getPrescriptionDetails() {
         String username = JwtRequestFilter.CURRENT_USER;
         User user = userDao.findById(username).get();
         return prescriptionRepository.findByUser(user);
+    }
+
+    public List<Prescription> getAllPrescriptionDetails() {
+        List<Prescription> prescription = new ArrayList<>();
+
+        prescriptionRepository.findAll().forEach(x -> prescription.add(x));
+        return prescription;
     }
 }

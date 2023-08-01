@@ -1,6 +1,9 @@
 package com.example.PharmacyWebApplication.PharmacyWebApplication.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.util.Date;
 
 @Entity
 public class OrderDetail {
@@ -11,7 +14,13 @@ public class OrderDetail {
     private String orderPaymentType;
     private String orderStatus;
     private Double orderAmount;
-    @OneToOne
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "order_placed_at")
+    private Date orderPlacedAt;
+    @ManyToOne // Many orders can be associated with one product
+    @JoinColumn(name = "product_id")
     private Product product;
     @ManyToOne
     @JoinColumn(name = "user_name")
@@ -77,5 +86,13 @@ public class OrderDetail {
 
     public void setOrderAmount(Double orderAmount) {
         this.orderAmount = orderAmount;
+    }
+
+    public Date getOrderPlacedAt() {
+        return orderPlacedAt;
+    }
+
+    public void setOrderPlacedAt(Date orderPlacedAt) {
+        this.orderPlacedAt = orderPlacedAt;
     }
 }

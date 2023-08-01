@@ -10,7 +10,8 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer cartId;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "product_id")
     private Product product;
 
     @ManyToOne

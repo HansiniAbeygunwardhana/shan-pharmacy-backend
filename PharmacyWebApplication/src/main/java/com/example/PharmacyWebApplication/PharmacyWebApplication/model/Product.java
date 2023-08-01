@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -42,6 +43,12 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "category_id")
     Category category;
+
+    @OneToMany(mappedBy = "product") // One product can have multiple orders associated with it
+    private List<OrderDetail> orderDetails;
+
+    @OneToMany(mappedBy = "product") // One product can have multiple orders associated with it
+    private List<Cart> cart;
 
     public Category getCategory() {
         return category;

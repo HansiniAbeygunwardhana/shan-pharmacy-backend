@@ -2,12 +2,14 @@ package com.example.PharmacyWebApplication.PharmacyWebApplication.controller;
 
 import com.example.PharmacyWebApplication.PharmacyWebApplication.common.ApiResponse;
 import com.example.PharmacyWebApplication.PharmacyWebApplication.dto.PrescriptionDto;
+import com.example.PharmacyWebApplication.PharmacyWebApplication.model.OrderDetail;
 import com.example.PharmacyWebApplication.PharmacyWebApplication.model.Prescription;
 import com.example.PharmacyWebApplication.PharmacyWebApplication.service.FileService;
 import com.example.PharmacyWebApplication.PharmacyWebApplication.service.PrescriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,15 +41,20 @@ public class PrescriptionController {
         }
     }
 
-    @GetMapping("/list")
-    public ResponseEntity<List<PrescriptionDto>> getPrescriptions(){
-        List<PrescriptionDto> prescriptions = prescriptionService.getAllPrescriptions();
-        return new ResponseEntity<>(prescriptions,HttpStatus.OK);
-    }
+//    @GetMapping("/list")
+//    public ResponseEntity<List<PrescriptionDto>> getPrescriptions(){
+//        List<PrescriptionDto> prescriptions = prescriptionService.getAllPrescriptions();
+//        return new ResponseEntity<>(prescriptions,HttpStatus.OK);
+//    }
 
     @GetMapping({"/getPrescriptionDetails"})
     public List<Prescription> getCartDetails() {
         return prescriptionService.getPrescriptionDetails();
     }
 
+    @PreAuthorize("hasRole('admin')")
+    @GetMapping("/all")
+    public List<Prescription> getAllPrescriptionDetails() {
+        return prescriptionService.getAllPrescriptionDetails();
+    }
 }

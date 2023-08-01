@@ -1,6 +1,9 @@
 package com.example.PharmacyWebApplication.PharmacyWebApplication.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "prescription")
@@ -25,6 +28,11 @@ public class Prescription {
     @ManyToOne
     @JoinColumn(name = "user_name")
     private User user;
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "prescription_uploaded_at")
+    private Date PrescriptionUploadedAt;
 
     public Prescription() {
         // Default constructor
