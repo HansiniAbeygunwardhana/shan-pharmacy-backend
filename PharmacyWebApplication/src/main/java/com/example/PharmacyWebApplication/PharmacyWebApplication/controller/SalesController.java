@@ -5,10 +5,8 @@ import com.example.PharmacyWebApplication.PharmacyWebApplication.service.SalesSe
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -16,12 +14,13 @@ import java.util.Map;
 
 // SalesController.java
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/sales")
 public class SalesController {
 
     @Autowired
     private SalesService salesService;
-
+    @PreAuthorize("hasRole('admin')")
     @GetMapping("/day")
     public ResponseEntity<Map<String, Object>> getSalesForDay(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
         Map<String, Object> response = new HashMap<>();
@@ -33,7 +32,7 @@ public class SalesController {
 
         return ResponseEntity.ok(response);
     }
-
+    @PreAuthorize("hasRole('admin')")
     @GetMapping("/last7days")
     public ResponseEntity<Map<String, Object>> getSalesForLast7Days() {
         Map<String, Object> response = new HashMap<>();
@@ -45,7 +44,7 @@ public class SalesController {
 
         return ResponseEntity.ok(response);
     }
-
+    @PreAuthorize("hasRole('admin')")
     @GetMapping("/last30days")
     public ResponseEntity<Map<String, Object>> getSalesForLast30Days() {
         Map<String, Object> response = new HashMap<>();
@@ -57,13 +56,13 @@ public class SalesController {
 
         return ResponseEntity.ok(response);
     }
-
+    @PreAuthorize("hasRole('admin')")
     @GetMapping("/bydayofweek")
     public ResponseEntity<Map<String, Double>> getSalesValueByDayOfWeek() {
         Map<String, Double> salesValueByDayOfWeek = salesService.getSalesValueByDayOfWeek();
         return ResponseEntity.ok(salesValueByDayOfWeek);
     }
-
+    @PreAuthorize("hasRole('admin')")
     @GetMapping("/percentages")
     public ResponseEntity<Map<String, String>> getPercentageOfSalesForEachProduct() {
         Map<String, String> productSalesPercentageMap = salesService.getPercentageOfSalesForEachProduct();
